@@ -1,4 +1,4 @@
-# h4g-client
+# brute
 
 A Python console application that saves and retrieves encrypted data to/from a MySQL database via a PHP REST API.
 
@@ -19,14 +19,14 @@ Download the executable for your platform from the [Releases](https://github.com
 
 **macOS/Linux:**
 ```bash
-./h4g-client -e keyword flag
-./h4g-client -d
+./brute -e keyword flag
+./brute -d
 ```
 
 **Windows:**
 ```cmd
-h4g-client.exe -e keyword flag
-h4g-client.exe -d
+brute.exe -e keyword flag
+brute.exe -d
 ```
 
 ### Using Python Script
@@ -46,24 +46,23 @@ h4g-client.exe -d
 
 ### Save Data
 ```bash
+brute -e {keyword} {flag}
+# or
 python3 client.py -e {keyword} {flag}
 ```
 
 ### Display All Flags
 ```bash
+brute -d
+# or
 python3 client.py -d
 ```
 
 ### Search by Keyword
 ```bash
+brute -d {keyword}
+# or
 python3 client.py -d {keyword}
-```
-
-## API Endpoint
-
-The application connects to:
-```
-https://dispatch.assettransporttms.com/api.php
 ```
 
 ## Building
