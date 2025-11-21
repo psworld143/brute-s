@@ -5,7 +5,7 @@
 PLATFORM=$(uname -s)
 
 echo "========================================="
-echo "  h4g-client Multi-Platform Build"
+echo "  brute Multi-Platform Build"
 echo "========================================="
 echo "Current platform: $PLATFORM"
 echo ""
@@ -14,23 +14,23 @@ case "$PLATFORM" in
     Darwin)
         echo "Building for macOS..."
         ./build.sh
-        if [ -f "dist/h4g-client" ]; then
+        if [ -f "dist/brute" ]; then
             mkdir -p dist/macos
-            cp dist/h4g-client dist/macos/h4g-client-macos
+            cp dist/brute dist/macos/brute-macos
             echo ""
             echo "✓ macOS build complete!"
-            echo "  Location: dist/macos/h4g-client-macos"
+            echo "  Location: dist/macos/brute-macos"
         fi
         ;;
     Linux)
         echo "Building for Linux..."
         ./build.sh
-        if [ -f "dist/h4g-client" ]; then
+        if [ -f "dist/brute" ]; then
             mkdir -p dist/linux
-            cp dist/h4g-client dist/linux/h4g-client-linux
+            cp dist/brute dist/linux/brute-linux
             echo ""
             echo "✓ Linux build complete!"
-            echo "  Location: dist/linux/h4g-client-linux"
+            echo "  Location: dist/linux/brute-linux"
         fi
         ;;
     *)

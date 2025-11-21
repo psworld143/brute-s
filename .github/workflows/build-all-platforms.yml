@@ -16,13 +16,13 @@ jobs:
         include:
           - os: ubuntu-latest
             name: linux
-            exe_name: h4g-client-linux
+            exe_name: brute-linux
           - os: windows-latest
             name: windows
-            exe_name: h4g-client.exe
+            exe_name: brute.exe
           - os: macos-latest
             name: macos
-            exe_name: h4g-client-macos
+            exe_name: brute-macos
     
     steps:
       - name: Checkout code
@@ -41,21 +41,21 @@ jobs:
       - name: Build executable
         run: |
           pip install pyinstaller
-          pyinstaller --onefile --name h4g-client --console client.py
+          pyinstaller --onefile --name brute --console client.py
       
       - name: Rename executable (Linux/macOS)
         if: matrix.os != 'windows-latest'
-        run: mv dist/h4g-client dist/${{ matrix.exe_name }}
+        run: mv dist/brute dist/${{ matrix.exe_name }}
       
       - name: Rename executable (Windows)
         if: matrix.os == 'windows-latest'
-        run: move dist\h4g-client.exe dist\${{ matrix.exe_name }}
+        run: move dist\brute.exe dist\${{ matrix.exe_name }}
         shell: cmd
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: h4g-client-${{ matrix.name }}
+          name: brute-${{ matrix.name }}
           path: dist/${{ matrix.exe_name }}
           retention-days: 30
 

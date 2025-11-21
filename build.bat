@@ -1,7 +1,7 @@
 @echo off
 REM Build script for Windows
 
-echo Building h4g-client for Windows...
+echo Building brute for Windows...
 
 REM Check if PyInstaller is installed
 pip show pyinstaller >nul 2>&1
@@ -19,13 +19,13 @@ if exist *.spec del /q *.spec
 
 REM Build the executable
 echo Building executable...
-pyinstaller --onefile --name h4g-client --console client.py
+pyinstaller --onefile --name brute --console client.py
 
 REM Check if build was successful
-if exist "dist\h4g-client.exe" (
+if exist "dist\brute.exe" (
     echo.
     echo Build successful!
-    echo Executable location: dist\h4g-client.exe
+    echo Executable location: dist\brute.exe
 ) else (
     echo Build failed!
     exit /b 1

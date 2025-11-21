@@ -5,7 +5,7 @@
 PLATFORM=${1:-current}
 
 echo "========================================="
-echo "  h4g-client Build Script"
+echo "  brute Build Script"
 echo "========================================="
 echo ""
 

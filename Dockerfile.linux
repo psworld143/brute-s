@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install pyinstaller
 
 # Build the executable
-RUN pyinstaller --onefile --name h4g-client --console client.py
+RUN pyinstaller --onefile --name brute --console client.py
 
-# The executable will be in /app/dist/h4g-client
+# The executable will be in /app/dist/brute
 

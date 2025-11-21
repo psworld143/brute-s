@@ -1,7 +1,7 @@
 #!/bin/bash
 # Build script for macOS and Linux
 
-echo "Building h4g-client for $(uname -s)..."
+echo "Building brute for $(uname -s)..."
 
 # Check if PyInstaller is installed
 if ! command -v pyinstaller &> /dev/null; then
@@ -15,15 +15,15 @@ rm -rf build dist __pycache__ *.spec
 
 # Build the executable
 echo "Building executable..."
-pyinstaller --onefile --name h4g-client --console client.py
+pyinstaller --onefile --name brute --console client.py
 
 # Check if build was successful
-if [ -f "dist/h4g-client" ] || [ -f "dist/h4g-client.exe" ]; then
+if [ -f "dist/brute" ] || [ -f "dist/brute.exe" ]; then
     echo ""
     echo "✓ Build successful!"
-    echo "Executable location: dist/h4g-client"
-    if [ -f "dist/h4g-client.exe" ]; then
-        echo "Executable location: dist/h4g-client.exe"
+    echo "Executable location: dist/brute"
+    if [ -f "dist/brute.exe" ]; then
+        echo "Executable location: dist/brute.exe"
     fi
 else
     echo "✗ Build failed!"
