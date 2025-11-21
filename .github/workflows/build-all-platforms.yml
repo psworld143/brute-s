@@ -26,7 +26,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -45,16 +45,15 @@ jobs:
       
       - name: Rename executable
         run: |
-          if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-            mv dist/h4g-client dist/${{ matrix.exe_name }}
-          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
+          if [ "${{ matrix.os }}" == "ubuntu-latest" ] || [ "${{ matrix.os }}" == "macos-latest" ]; then
             mv dist/h4g-client dist/${{ matrix.exe_name }}
           elif [ "${{ matrix.os }}" == "windows-latest" ]; then
-            move dist\h4g-client.exe dist\${{ matrix.exe_name }}
+            if (Test-Path "dist\h4g-client.exe") { Move-Item "dist\h4g-client.exe" "dist\${{ matrix.exe_name }}" }
           fi
+        shell: bash
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: h4g-client-${{ matrix.name }}
           path: dist/${{ matrix.exe_name }}
