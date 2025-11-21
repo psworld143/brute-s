@@ -1,0 +1,86 @@
+=========================================
+  Windows Build Instructions
+=========================================
+
+Since we cannot build Windows executables from macOS/Linux,
+please follow these instructions on a Windows machine:
+
+STEP 1: Prerequisites
+--------------------
+1. Install Python 3.7 or higher from python.org
+2. Open Command Prompt or PowerShell as Administrator
+
+STEP 2: Setup Project
+--------------------
+1. Copy the entire h4g folder to your Windows machine
+2. Navigate to the project directory:
+   cd C:\path\to\h4g
+
+STEP 3: Install Dependencies
+----------------------------
+pip install -r requirements.txt
+
+STEP 4: Build Executable
+------------------------
+build.bat
+
+OR manually:
+pyinstaller --onefile --name h4g-client --console client.py
+
+STEP 5: Find Executable
+-----------------------
+The executable will be at:
+dist\h4g-client.exe
+
+STEP 6: Test
+-----------
+dist\h4g-client.exe -e test flag
+dist\h4g-client.exe -d
+
+=========================================
+  Alternative: Use WSL (Windows Subsystem for Linux)
+=========================================
+
+If you have WSL installed, you can build Linux version:
+
+1. Open WSL terminal
+2. Navigate to project: cd /mnt/c/path/to/h4g
+3. Run: ./build.sh
+4. Executable: dist/h4g-client
+
+=========================================
+  Alternative: Use GitHub Actions (Free CI/CD)
+=========================================
+
+Create .github/workflows/build.yml:
+
+name: Build All Platforms
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Build
+        run: |
+          pip install pyinstaller
+          pyinstaller --onefile --name h4g-client --console client.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: h4g-client-${{ matrix.os }}
+          path: dist/
+
+=========================================
+
