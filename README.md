@@ -15,19 +15,36 @@ A Python console application that saves and retrieves encrypted data to/from a M
 
 ### Using Standalone Executable
 
-Download the executable for your platform from the [Releases](https://github.com/psworld143/brute-s/releases) page.
+Download the binary file for your platform from the `build/` folder in this repository:
 
-**macOS/Linux:**
-```bash
-./brute -e keyword flag
-./brute -d
-```
+**macOS:**
+1. Download `build/brute-macos.zip` from the repository
+2. Extract the `brute` executable
+3. Make it executable (if needed): `chmod +x brute`
+4. Run:
+   ```bash
+   ./brute -e keyword flag
+   ./brute -d
+   ```
+
+**Linux:**
+1. Download `build/brute-linux.zip` from the repository
+2. Extract the `brute-linux` executable
+3. Make it executable (if needed): `chmod +x brute-linux`
+4. Run:
+   ```bash
+   ./brute-linux -e keyword flag
+   ./brute-linux -d
+   ```
 
 **Windows:**
-```cmd
-brute.exe -e keyword flag
-brute.exe -d
-```
+1. Download `build/brute-windows.zip` from the repository
+2. Extract the `brute.exe` executable
+3. Run:
+   ```cmd
+   brute.exe -e keyword flag
+   brute.exe -d
+   ```
 
 ### Using Python Script
 
@@ -65,20 +82,36 @@ brute -d {keyword}
 python3 client.py -d {keyword}
 ```
 
-## Building
+## Download Binaries
+
+Pre-built binaries for all platforms are available in the `build/` folder:
+
+- **macOS**: `build/brute-macos.zip` - Extract to get `brute` executable
+- **Linux**: `build/brute-linux.zip` - Extract to get `brute-linux` executable
+- **Windows**: `build/brute-windows.zip` - Extract to get `brute.exe` executable
+
+Simply download the zip file for your platform, extract it, and run the executable.
+
+## Building from Source
+
+If you want to build the executable yourself:
 
 ### macOS/Linux
 ```bash
 ./build.sh
 ```
 
+The executable will be created at: `dist/brute`
+
 ### Windows
 ```cmd
 build.bat
 ```
 
+The executable will be created at: `dist\brute.exe`
+
 ### All Platforms (GitHub Actions)
-The repository includes GitHub Actions workflow that automatically builds for all platforms on push.
+The repository includes GitHub Actions workflow that automatically builds for all platforms on push. The built executables are available in the `build/` folder.
 
 ---
 
