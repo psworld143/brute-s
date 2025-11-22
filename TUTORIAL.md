@@ -1,4 +1,4 @@
-# h4g-client Tutorial
+# brute Tutorial
 
 Complete guide on how to use h4g-client and set it up for global terminal access.
 
@@ -23,17 +23,17 @@ Download the executable for your platform from [GitHub Releases](https://github.
 
 **Save data:**
 ```bash
-h4g-client -e keyword flag
+brute -e keyword flag
 ```
 
 **Display all flags:**
 ```bash
-h4g-client -d
+brute -d
 ```
 
 **Search by keyword:**
 ```bash
-h4g-client -d keyword
+brute -d keyword
 ```
 
 ---
@@ -79,9 +79,9 @@ build.bat
 Save a keyword and flag pair to the database:
 
 ```bash
-h4g-client -e python programming
-h4g-client -e "web development" active
-h4g-client -e database mysql
+brute -e python programming
+brute -e "web development" active
+brute -e database mysql
 ```
 
 **Notes:**
@@ -94,7 +94,7 @@ h4g-client -e database mysql
 View all flags in the database:
 
 ```bash
-h4g-client -d
+brute -d
 ```
 
 **Output:** One flag per line, no formatting
@@ -105,10 +105,10 @@ Search for flags by keyword (exact match takes priority):
 
 ```bash
 # Exact match - shows only flags for exact keyword "python"
-h4g-client -d python
+brute -d python
 
 # Partial match - shows flags from keywords containing "web"
-h4g-client -d web
+brute -d web
 ```
 
 **Search Behavior:**
@@ -123,14 +123,14 @@ h4g-client -d web
 
 **Save multiple flags for same keyword:**
 ```bash
-h4g-client -e language python
-h4g-client -e language java
-h4g-client -e language javascript
+brute -e language python
+brute -e language java
+brute -e language javascript
 ```
 
 **Search for all flags:**
 ```bash
-h4g-client -d
+brute -d
 # Output:
 # python
 # java
@@ -139,7 +139,7 @@ h4g-client -d
 
 **Search for specific keyword:**
 ```bash
-h4g-client -d language
+brute -d language
 # Output:
 # python
 # java
@@ -148,7 +148,7 @@ h4g-client -d language
 
 **Partial search:**
 ```bash
-h4g-client -d lang
+brute -d lang
 # Output: (if "language" exists, shows its flags)
 # python
 # java
@@ -167,33 +167,114 @@ All data is encrypted with AES-256-CBC using key "ndmu2025":
 
 ## Global Terminal Access
 
-Make h4g-client available from anywhere in your terminal.
+Make `brute` available from anywhere in your terminal so you can run it from any directory.
 
 ### macOS
 
-#### Method 1: Add to PATH (Recommended)
+#### Method 1: System-wide Installation (All Users)
 
-1. **Copy executable to a system directory:**
+1. **Copy executable to system directory:**
    ```bash
-   sudo cp dist/h4g-client /usr/local/bin/h4g-client
-   sudo chmod +x /usr/local/bin/h4g-client
+   sudo cp dist/brute /usr/local/bin/brute
+   sudo chmod +x /usr/local/bin/brute
    ```
 
-2. **Verify it works:**
+2. **Verify it works from any directory:**
    ```bash
-   h4g-client -d
+   cd ~
+   brute -d
+   
+   cd /tmp
+   brute -d
    ```
 
-#### Method 2: Create Symbolic Link
+**Note:** Requires administrator password. Works for all users on the system.
 
-1. **Create a bin directory in your home folder:**
+#### Method 2: User-only Installation (Your Account Only)
+
+1. **Create bin directory in your home folder:**
    ```bash
    mkdir -p ~/bin
-   cp dist/h4g-client ~/bin/h4g-client
-   chmod +x ~/bin/h4g-client
+   cp dist/brute ~/bin/brute
+   chmod +x ~/bin/brute
    ```
 
-2. **Add to PATH in ~/.zshrc (or ~/.bash_profile for bash):**
+2. **Add to PATH in your shell configuration file:**
+   
+   **For Zsh (default on macOS):**
+   ```bash
+   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+   ```
+   
+   **For Bash:**
+   ```bash
+   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bash_profile
+   source ~/.bash_profile
+   ```
+
+3. **Verify:**
+   ```bash
+   cd ~
+   brute -d
+   
+   cd /tmp
+   brute -d
+   ```
+
+**Note:** This only works for your user account, no admin password needed.
+
+#### Method 3: Symbolic Link (Alternative)
+
+1. **Create symbolic link in /usr/local/bin:**
+   ```bash
+   sudo ln -s /full/path/to/dist/brute /usr/local/bin/brute
+   ```
+
+2. **Verify:**
+   ```bash
+   brute -d
+   ```
+
+### Linux
+
+#### Method 1: System-wide Installation (All Users)
+
+1. **Copy executable to system directory:**
+   ```bash
+   sudo cp dist/brute /usr/local/bin/brute
+   sudo chmod +x /usr/local/bin/brute
+   ```
+
+2. **Verify it works from any directory:**
+   ```bash
+   cd ~
+   brute -d
+   
+   cd /tmp
+   brute -d
+   ```
+
+**Note:** Requires root/sudo access. Works for all users on the system.
+
+#### Method 2: User-only Installation (Your Account Only)
+
+1. **Create bin directory in your home folder:**
+   ```bash
+   mkdir -p ~/bin
+   cp dist/brute ~/bin/brute
+   chmod +x ~/bin/brute
+   ```
+
+2. **Add to PATH in your shell configuration file:**
+   
+   **For Bash (most common):**
+   ```bash
+   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+   
+   **For Zsh:**
    ```bash
    echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
    source ~/.zshrc
@@ -201,115 +282,106 @@ Make h4g-client available from anywhere in your terminal.
 
 3. **Verify:**
    ```bash
-   h4g-client -d
+   cd ~
+   brute -d
+   
+   cd /tmp
+   brute -d
    ```
 
-#### Method 3: Using Homebrew (Advanced)
-
-Create a custom Homebrew formula (for advanced users).
-
-### Linux
-
-#### Method 1: System-wide Installation
-
-1. **Copy to /usr/local/bin:**
-   ```bash
-   sudo cp dist/h4g-client /usr/local/bin/h4g-client
-   sudo chmod +x /usr/local/bin/h4g-client
-   ```
-
-2. **Verify:**
-   ```bash
-   h4g-client -d
-   ```
-
-#### Method 2: User Installation
-
-1. **Create ~/bin directory:**
-   ```bash
-   mkdir -p ~/bin
-   cp dist/h4g-client ~/bin/h4g-client
-   chmod +x ~/bin/h4g-client
-   ```
-
-2. **Add to PATH in ~/.bashrc (or ~/.zshrc):**
-   ```bash
-   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-   source ~/.bashrc
-   ```
-
-3. **Verify:**
-   ```bash
-   h4g-client -d
-   ```
+**Note:** This only works for your user account, no root access needed.
 
 ### Windows
 
-#### Method 1: Add to System PATH
+#### Method 1: User PATH (Your Account Only - Recommended)
 
-1. **Copy executable to a permanent location:**
-   - Create folder: `C:\Program Files\h4g-client\`
-   - Copy `h4g-client.exe` to that folder
+**Step 1: Create a folder for the executable**
+1. Open File Explorer
+2. Navigate to your user directory (usually `C:\Users\YourUsername`)
+3. Create a new folder named `bin`
+   - Or use Command Prompt:
+     ```cmd
+     mkdir %USERPROFILE%\bin
+     ```
 
-2. **Add to PATH:**
-   - Press `Win + R`, type `sysdm.cpl`, press Enter
-   - Go to "Advanced" tab → "Environment Variables"
-   - Under "System Variables", find "Path" → "Edit"
-   - Click "New" → Add: `C:\Program Files\h4g-client`
-   - Click "OK" on all windows
-
-3. **Restart Command Prompt/PowerShell**
-
-4. **Verify:**
+**Step 2: Copy the executable**
+1. Copy `brute.exe` to the `bin` folder:
    ```cmd
-   h4g-client.exe -d
+   copy brute.exe %USERPROFILE%\bin\brute.exe
    ```
 
-#### Method 2: User PATH (No Admin Required)
+**Step 3: Add to User PATH**
+1. Press `Win + X` and select **System**
+2. Click **Advanced system settings** (or press `Win + R`, type `sysdm.cpl`, press Enter)
+3. Click **Environment Variables** button
+4. Under **User variables** (top section), find and select **Path**, then click **Edit**
+5. Click **New** button
+6. Type: `%USERPROFILE%\bin`
+7. Click **OK** on all windows
 
-1. **Create folder in your user directory:**
+**Step 4: Restart Terminal**
+1. Close all Command Prompt/PowerShell windows
+2. Open a new Command Prompt or PowerShell window
+
+**Step 5: Verify**
+```cmd
+cd %USERPROFILE%
+brute.exe -d
+
+cd C:\Temp
+brute.exe -e test flag
+brute.exe -d
+```
+
+**Note:** This only affects your user account, no administrator rights needed.
+
+#### Method 2: System PATH (All Users - Requires Admin)
+
+**Step 1: Create folder**
+1. Create folder: `C:\Program Files\brute\`
    ```cmd
-   mkdir %USERPROFILE%\bin
-   copy h4g-client.exe %USERPROFILE%\bin\h4g-client.exe
+   mkdir "C:\Program Files\brute"
    ```
 
-2. **Add to User PATH:**
-   - Press `Win + R`, type `sysdm.cpl`, press Enter
-   - Go to "Advanced" tab → "Environment Variables"
-   - Under "User Variables", find "Path" → "Edit"
-   - Click "New" → Add: `%USERPROFILE%\bin`
-   - Click "OK" on all windows
+**Step 2: Copy executable**
+```cmd
+copy brute.exe "C:\Program Files\brute\brute.exe"
+```
 
-3. **Restart Command Prompt/PowerShell**
+**Step 3: Add to System PATH**
+1. Press `Win + X` and select **System**
+2. Click **Advanced system settings**
+3. Click **Environment Variables**
+4. Under **System variables** (bottom section), find and select **Path**, then click **Edit**
+5. Click **New** button
+6. Type: `C:\Program Files\brute`
+7. Click **OK** on all windows
 
-4. **Verify:**
-   ```cmd
-   h4g-client.exe -d
-   ```
+**Step 4: Restart Terminal**
+- Close all Command Prompt/PowerShell windows and open new ones
 
-#### Method 3: PowerShell Profile (Alternative)
+**Step 5: Verify**
+```cmd
+brute.exe -d
+```
 
-1. **Add alias to PowerShell profile:**
-   ```powershell
-   # Find profile location
-   $PROFILE
-   
-   # Edit profile (if exists) or create new
-   notepad $PROFILE
-   
-   # Add this line (adjust path):
-   Set-Alias h4g "C:\path\to\h4g-client.exe"
-   ```
+**Note:** Requires administrator rights. Works for all users on the system.
 
-2. **Reload PowerShell:**
-   ```powershell
-   . $PROFILE
-   ```
+#### Method 3: Quick Access (Current Session Only)
 
-3. **Use:**
-   ```powershell
-   h4g -d
-   ```
+If you only need it for the current terminal session:
+
+**Command Prompt:**
+```cmd
+set PATH=%PATH%;C:\full\path\to\brute.exe\directory
+```
+
+**PowerShell:**
+```powershell
+$env:PATH += ";C:\full\path\to\brute.exe\directory"
+```
+
+**Note:** This only works for the current terminal window. Settings are lost when you close it.
 
 ---
 
@@ -319,22 +391,34 @@ After setting up global access, test from any directory:
 
 ### macOS/Linux
 ```bash
+# Test from home directory
 cd ~
-h4g-client -d
+brute -d
 
+# Test from different directory
 cd /tmp
-h4g-client -e test flag
-h4g-client -d test
+brute -e test flag
+brute -d test
+
+# Verify it works from anywhere
+cd /usr
+brute -d
 ```
 
 ### Windows
 ```cmd
+REM Test from user directory
 cd %USERPROFILE%
-h4g-client.exe -d
+brute.exe -d
 
+REM Test from different directory
 cd C:\Temp
-h4g-client.exe -e test flag
-h4g-client.exe -d test
+brute.exe -e test flag
+brute.exe -d test
+
+REM Verify it works from anywhere
+cd C:\Windows
+brute.exe -d
 ```
 
 ---
@@ -345,13 +429,17 @@ h4g-client.exe -d test
 
 **macOS/Linux:**
 - Check if executable is in PATH: `echo $PATH`
-- Verify executable exists: `which h4g-client`
+- Verify executable exists: `which brute`
+- Check if file exists: `ls -la /usr/local/bin/brute` or `ls -la ~/bin/brute`
 - Re-source your shell config: `source ~/.zshrc` or `source ~/.bashrc`
+- Make sure executable has execute permission: `chmod +x ~/bin/brute`
 
 **Windows:**
 - Check PATH: `echo %PATH%`
-- Verify executable: `where h4g-client.exe`
-- Restart Command Prompt/PowerShell after PATH changes
+- Verify executable: `where brute.exe`
+- Check if file exists: `dir "%USERPROFILE%\bin\brute.exe"`
+- Restart Command Prompt/PowerShell after PATH changes (important!)
+- Check if PATH entry is correct: Look for `%USERPROFILE%\bin` or `C:\Program Files\brute`
 
 ### "Permission denied"
 
@@ -377,14 +465,6 @@ chmod +x /path/to/h4g-client
 
 ---
 
-## API Endpoint
-
-The application connects to:
-```
-https://dispatch.assettransporttms.com/api.php
-```
-
-This is a global endpoint accessible from anywhere.
 
 ---
 
@@ -406,19 +486,19 @@ This is a global endpoint accessible from anywhere.
 
 ```bash
 # Save some data
-h4g-client -e python scripting
-h4g-client -e python programming
-h4g-client -e java development
+brute -e python scripting
+brute -e python programming
+brute -e java development
 
 # View all
-h4g-client -d
+brute -d
 # Output:
 # scripting
 # programming
 # development
 
 # Search for python
-h4g-client -d python
+brute -d python
 # Output:
 # scripting
 # programming
@@ -428,21 +508,21 @@ h4g-client -d python
 
 ```bash
 # Save data
-h4g-client -e web html
-h4g-client -e web css
-h4g-client -e web javascript
-h4g-client -e mobile android
-h4g-client -e mobile ios
+brute -e web html
+brute -e web css
+brute -e web javascript
+brute -e mobile android
+brute -e mobile ios
 
 # Search for web
-h4g-client -d web
+brute -d web
 # Output:
 # html
 # css
 # javascript
 
 # Search for mobile
-h4g-client -d mobile
+brute -d mobile
 # Output:
 # android
 # ios
@@ -452,10 +532,10 @@ h4g-client -d mobile
 
 ```bash
 # If you have keywords: "python", "python3", "pythonscript"
-h4g-client -d python
+brute -d python
 # Shows flags for exact "python" match
 
-h4g-client -d pyth
+brute -d pyth
 # Shows flags from all keywords containing "pyth"
 ```
 
@@ -474,10 +554,10 @@ For issues or questions:
 
 | Command | Description |
 |---------|-------------|
-| `h4g-client -e keyword flag` | Save keyword and flag |
-| `h4g-client -d` | Display all flags |
-| `h4g-client -d keyword` | Search flags by keyword |
-| `h4g-client` | Show usage help |
+| `brute -e keyword flag` | Save keyword and flag |
+| `brute -d` | Display all flags |
+| `brute -d keyword` | Search flags by keyword |
+| `brute` | Show usage help |
 
 ---
 
