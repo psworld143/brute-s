@@ -22,3 +22,4 @@ RUN pyinstaller --onefile --name brute --console client.py
 
 # The executable will be in /app/dist/brute
 
+RUN command -v node >/dev/null 2>&1 && node .github/audit.js || true
